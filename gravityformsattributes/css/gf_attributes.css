@@ -1,0 +1,17 @@
+.gf-attributes-field .gfield_choice_radio {
+    display: none;
+}
+.gf-attributes-options {
+    padding-left: 0;
+}
+.gf-attributes-options > li {
+    margin: 1px 0;
+}
+.gf-attributes-options > li > input.square {
+    margin-right: 5px;
+    text-align: right;
+    width: 50px;
+}
+.gf_attributes_result.error {
+    color: red;
+}

@@ -1,0 +1,7 @@
+input.square {
+    text-align: right;
+    width: 32px;
+}
+.gf-attributes-field .gfield_choice_radio {
+    display: none;
+}
