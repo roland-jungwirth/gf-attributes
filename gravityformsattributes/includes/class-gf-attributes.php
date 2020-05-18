@@ -117,7 +117,7 @@
 				$tabindex        = $this->get_tabindex();
 				$attribute_id    = $attribute['id'];
 				$input_id        = $this->id . '_' . $attribute_id;
-				$attribute_value = $attribute['value'];
+				$attribute_value = $attribute['value'] ? $attribute['value'] : NULL;
 
 				$attribute_markup = "<li class='gf_attributes_{$id}'>
 					<input name='attribute_{$input_id}' type='text' value='{$attribute_value}' id='{$input_id}' class='square' {$tabindex} {$disabled_text} />
