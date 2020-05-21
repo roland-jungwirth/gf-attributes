@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die();
 }
 
-define( 'GF_SURVEY_VERSION', '3.4' );
+define( 'GF_ATTRIBUTES_VERSION', '1.0' );
 
 add_action( 'gform_loaded', array( 'GF_Attributes_Bootstrap', 'load' ), 5 );
 

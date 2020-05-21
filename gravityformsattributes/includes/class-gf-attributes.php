@@ -71,7 +71,7 @@
 			$field_id      = $form_id == 0 ? "gf-attributes-$id" : "gf-attributes-$form_id-$id";
 			$disabled_text = $is_form_editor ? 'disabled="disabled"' : '';
 
-			$hidden_input     = sprintf( "<input type='hidden' id='%s-hidden' name='input_%d' />", $field_id, $this->id );
+			$hidden_input     = sprintf( "<input type='hidden' id='%s-hidden' name='input_%d' value='%s' />", $field_id, $this->id, esc_attr( $value ) );
 			$points_available = sprintf( "<p class='gf_attributes_result'>Sie können noch <span id='gf-attributes-remainder-%s-%s'>10</span> Punkte vergeben.</p>", $form_id, $this->id );
 
 			if ( is_admin() ) {
@@ -104,6 +104,10 @@
 
 			$attribute_number = 1;
 
+			if ( ! empty( $value ) ) {
+				$value = json_decode( $value, true );
+			}
+
 			// Loop through field choices.
 			foreach ( $this->attributes_default as $attribute ) {
 				// Hack to skip numbers ending in 0, so that 5.1 doesn't conflict with 5.10.
@@ -117,7 +121,16 @@
 				$tabindex        = $this->get_tabindex();
 				$attribute_id    = $attribute['id'];
 				$input_id        = $this->id . '_' . $attribute_id;
-				$attribute_value = $attribute['value'] ? $attribute['value'] : NULL;
+				$attribute_value = '';
+
+				if ( ! empty( $value ) ) {
+					foreach ( $value as $val ) {
+						if ( $val['id'] == $attribute_id ) {
+							$attribute_value = $val['value'];
+							break;
+						}
+					}
+				}
 
 				$attribute_markup = "<li class='gf_attributes_{$id}'>
 					<input name='attribute_{$input_id}' type='text' value='{$attribute_value}' id='{$input_id}' class='square' {$tabindex} {$disabled_text} />
