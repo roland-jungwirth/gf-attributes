@@ -84,7 +84,6 @@
 					'src'      => $this->get_base_url() . '/js/gf_attributes_form_editor.js',
 					'version'  => $this->_version,
 					'deps'     => array( 'jquery' ),
-					'callback' => array( $this, 'localize_scripts' ),
 					'enqueue'  => array(
 						array( 'admin_page' => array( 'form_editor' ) ),
 					),
@@ -128,37 +127,6 @@
 			);
 
 			return array_merge( parent::styles(), $styles );
-		}
-
-		/**
-		 * Localize the strings used by the scripts.
-		 */
-		public function localize_scripts() {
-			// Get current page protocol
-			$protocol = isset( $_SERVER['HTTPS'] ) ? 'https://' : 'http://';
-			// Output admin-ajax.php URL with same protocol as current page
-			$params = array(
-				'ajaxurl'   => admin_url( 'admin-ajax.php', $protocol ),
-				'imagesUrl' => $this->get_base_url() . '/images',
-				'strings'   => array(
-					'untitledAttributesField' => wp_strip_all_tags( __( 'Untitled Attributes Field', 'gravityformsattributes' ) ),
-				),
-			);
-			wp_localize_script( 'gsurvey_form_editor_js', 'gsurveyVars', $params );
-
-			//localize strings for the js file
-			$strings = array(
-				'firstChoice'   => wp_strip_all_tags( __( 'First attribute', 'gravityformssurvey' ) ),
-				'secondChoice'  => wp_strip_all_tags( __( 'Second attribute', 'gravityformssurvey' ) ),
-				'thirdChoice'   => wp_strip_all_tags( __( 'Third attribute', 'gravityformssurvey' ) ),
-				'fourthChoice'  => wp_strip_all_tags( __( 'Fourth attribute', 'gravityformssurvey' ) ),
-				'fifthChoice'   => wp_strip_all_tags( __( 'Fifth attribute', 'gravityformssurvey' ) ),
-				'dragToReOrder' => wp_strip_all_tags( __( 'Drag to re-order', 'gravityformssurvey' ) ),
-				'addAnotherRow' => wp_strip_all_tags( __( 'Add another row', 'gravityformssurvey' ) ),
-				'removeThisRow' => wp_strip_all_tags( __( 'Remove this row', 'gravityformssurvey' ) ),
-
-			);
-			wp_localize_script( 'gf_attributes_form_editor_js', 'gfAttributesStrings', $strings );
 		}
 
 		/**
