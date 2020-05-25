@@ -87,6 +87,20 @@
 			}
 		}
 
+		public function validate( $value, $form ) {
+			$values = json_decode( $value );
+			$sum    = 0;
+			foreach ( $values as $value_object ) {
+				$sum += $value_object->value;
+			}
+
+			// is the sum of all the values is 10?
+			if ( $sum < 10 ) {
+				$this->failed_validation  = TRUE;
+				$this->validation_message = empty( $this->errorMessage ) ? esc_html__( 'Die Summe der Werte muß 10 sein.', 'gravityforms' ) : $this->errorMessage;
+			}
+		}
+		
 		/**
 		 * Returns the markup for the attribute choices.
 		 *
